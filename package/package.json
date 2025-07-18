@@ -11,7 +11,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "addGit": "eval \"$(ssh-agent -s)\" &&  ssh-add ~/.ssh/rajanlagah"
   },
   "dependencies": {
     "react": "^19.1.0",
