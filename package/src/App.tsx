@@ -8,17 +8,6 @@ function MyApp() {
     </>
   )
 }
-
-function AIDropDown() {
-
-  return (
-    <>
-     Hi From My App AIDropDown 1
-    </>
-  )
-}
-
 export {
-  MyApp, 
-  AIDropDown
+  MyApp
 }
