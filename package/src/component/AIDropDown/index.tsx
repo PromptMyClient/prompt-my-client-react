@@ -9,6 +9,7 @@ interface AIDropDownProps {
   optionStyle?: React.CSSProperties;
   optionHoverStyle?: React.CSSProperties;
   buttonStyle?: React.CSSProperties;
+  size?: '48px' | '52px';
 }
 
 const defaultOptions = [
@@ -45,7 +46,7 @@ const defaultOptionHoverStyle: React.CSSProperties = {
 };
 
 const defaultButtonStyle: React.CSSProperties = {
-  padding: '0.6rem',
+  padding: '8px',
   borderRadius: '50%',
   border: '1px solid #e3e2e0',
   // background: '#fff',
@@ -61,6 +62,7 @@ export default function AIDropDown({
   optionStyle,
   optionHoverStyle,
   buttonStyle,
+  size = '48px',
 }: AIDropDownProps) {
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
@@ -94,8 +96,8 @@ export default function AIDropDown({
         className='ai-dropdown-trigger'
         style={{
           ...defaultButtonStyle,
-          height: '48px',
-          width: '48px',
+          height: size,
+          width: size,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
