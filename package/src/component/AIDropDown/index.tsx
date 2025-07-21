@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import AIWand from '../../icons/wand';
 import '../../css/AIDropDown.css';
 
+type PromptOption = {prompt:string, label:string}
 interface AIDropDownProps {
   text: string;
   aiResponseCallback: (response: string) => void;
@@ -10,12 +11,20 @@ interface AIDropDownProps {
   optionHoverStyle?: React.CSSProperties;
   buttonStyle?: React.CSSProperties;
   size?: '48px' | '52px';
+  promptOtions: PromptOption[]
 }
 
-const defaultOptions = [
-  'Grammar fix',
-  'Professional tone',
-  'Make it short',
+const defaultOptions:PromptOption[] = [
+  {
+    prompt: 'Fix grammer in the text',
+    label: 'Fix Grammar'
+  },{
+    prompt: 'I need Professional tone',
+    label: 'Professional tone'
+  },{
+    prompt: 'Make it short',
+    label: 'Make it short'
+  },
 ];
 
 const defaultDropdownStyle: React.CSSProperties = {
@@ -63,6 +72,7 @@ export default function AIDropDown({
   optionHoverStyle,
   buttonStyle,
   size = '48px',
+  promptOptions = []
 }: AIDropDownProps) {
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
@@ -84,10 +94,9 @@ export default function AIDropDown({
     };
   }, [open]);
 
-  const handleSelect = (option: string) => {
+  const handleSelect = (option: PromptOption) => {
     setOpen(false);
-    console.log('option', option);
-    aiResponseCallback(text); // For now, just return the same text
+    aiResponseCallback(option.prompt + text); // For now, just return the same text
   };
 
   const renderTrigger = () => {
@@ -111,14 +120,16 @@ export default function AIDropDown({
     );
   };
 
+  const OPTIONS = (promptOptions ?? []).length > 0 ? promptOptions : defaultOptions
+
   return (
     <div style={{ position: 'relative', display: 'inline-block' }} ref={ref}>
       {renderTrigger()}
       {open && (
         <div style={{ ...defaultDropdownStyle, ...dropdownStyle }}>
-          {defaultOptions.map((option, idx) => (
+          {OPTIONS.map((option: PromptOption, idx: number) => (
             <div
-              key={option}
+              key={option.label + idx}
               style={
                 hovered === idx
                   ? { ...defaultOptionHoverStyle, ...optionHoverStyle }
@@ -128,7 +139,7 @@ export default function AIDropDown({
               onMouseLeave={() => setHovered(null)}
               onClick={() => handleSelect(option)}
             >
-              {option}
+              {option.label}
             </div>
           ))}
         </div>
