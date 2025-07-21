@@ -11,7 +11,7 @@ interface AIDropDownProps {
   optionHoverStyle?: React.CSSProperties;
   buttonStyle?: React.CSSProperties;
   size?: '48px' | '52px';
-  promptOtions: PromptOption[]
+  promptOptions: PromptOption[]
 }
 
 const defaultOptions:PromptOption[] = [
