@@ -1,8 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import AIWand from '../../icons/wand';
 import '../../css/AIDropDown.css';
+import { getPromptResponse } from '../../api/prompt';
 
-type PromptOption = {prompt:string, label:string}
+type PromptOption = {
+  prompt: string, 
+  label: string, 
+  tone?: string, 
+  style?: string
+}
 interface AIDropDownProps {
   text: string;
   aiResponseCallback: (response: string) => void;
@@ -17,14 +23,40 @@ interface AIDropDownProps {
 const defaultOptions:PromptOption[] = [
   {
     prompt: 'Fix grammer in the text',
-    label: 'Fix Grammar'
+    label: 'Fix Grammar',
+    tone: 'professional',
+    style: 'concise'
   },{
     prompt: 'I need Professional tone',
-    label: 'Professional tone'
+    label: 'Professional tone',
+    tone: 'professional',
+    style: 'formal'
   },{
     prompt: 'Make it short',
-    label: 'Make it short'
-  },
+    label: 'Make it short',
+    tone: 'friendly',
+    style: 'concise'
+  },{
+    prompt: 'Make it more detailed',
+    label: 'Make it detailed',
+    tone: 'professional',
+    style: 'detailed'
+  },{
+    prompt: 'Make it conversational',
+    label: 'Conversational',
+    tone: 'friendly',
+    style: 'conversational'
+  },{
+    prompt: 'Make it creative',
+    label: 'Creative',
+    tone: 'enthusiastic',
+    style: 'creative'
+  },{
+    prompt: 'Make it persuasive',
+    label: 'Persuasive',
+    tone: 'confident',
+    style: 'persuasive'
+  }
 ];
 
 const defaultDropdownStyle: React.CSSProperties = {
@@ -93,10 +125,18 @@ export default function AIDropDown({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [open]);
-
-  const handleSelect = (option: PromptOption) => {
+  console.log('text ===>', text)
+  const handleSelect = async (option: PromptOption) => {
     setOpen(false);
-    aiResponseCallback(option.prompt + text); // For now, just return the same text
+    
+    try {
+      // Call the API with tone and style options
+      const response = await getPromptResponse(text, option.prompt, option.tone, option.style);
+      aiResponseCallback(response.response || response.text || 'No response received');
+    } catch (error) {
+      console.error('Error getting AI response:', error);
+      aiResponseCallback('Error: Unable to get AI response');
+    }
   };
 
   const renderTrigger = () => {
