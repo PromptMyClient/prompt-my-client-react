@@ -124,8 +124,7 @@ export default function AIDropDown({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [open]);
-  console.log('text ===>', text)
+  }, [open]); 
   const handleSelect = async (option: PromptOption) => {
     setOpen(false);
     
