@@ -131,7 +131,7 @@ export default function AIDropDown({
     try {
       // Call the API with tone and style options
       const response = await getPromptResponse(text, option.prompt, option.tone, option.style);
-      aiResponseCallback(response.response || response.text || 'No response received');
+      aiResponseCallback(response.result || 'No response received');
     } catch (error) {
       console.error('Error getting AI response:', error);
       aiResponseCallback('Error: Unable to get AI response');

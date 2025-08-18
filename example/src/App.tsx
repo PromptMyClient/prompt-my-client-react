@@ -17,6 +17,9 @@ function App() {
   // Dummy callback for AIDropDown
   const handleAIResponse = (response: string) => {
     // You can update this to do something with the response
+    if(response){
+      setInput(response)
+    }
     console.log("AI_RESPONSE", response)
   };
 
