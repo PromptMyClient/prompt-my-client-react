@@ -1,1 +1,3 @@
-export { AIDropDown } from './App'; 
+import AIDropDown from './component/AIDropDown'; 
+
+export { AIDropDown };

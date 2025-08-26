@@ -1,0 +1,7 @@
+.ai-dropdown-trigger {
+  background: #fff;
+}
+.ai-dropdown-trigger:hover {
+  background: #e1e1e1;
+  transition: background 0.2s ease;
+}
