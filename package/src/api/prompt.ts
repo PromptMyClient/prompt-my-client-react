@@ -1,7 +1,7 @@
 
 export const getPromptResponse = async (text: string, prompt: string, tone?: string, style?: string) => {
     try {
-        const response = await fetch('http://localhost:5000/client/prompts/generate', {
+        const response = await fetch('https://promptmyclient.com/client/prompts/generate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
