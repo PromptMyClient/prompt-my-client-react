@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../../css/AIDropDown.css';
-import { getPromptResponse } from '../../api/prompt';
+import { usePrompt } from '../../hooks/usePrompt';
 
 type PromptOption = {
   prompt: string, 
@@ -111,6 +111,15 @@ export default function AIDropDown({
   const [hovered, setHovered] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
+  const { generatePrompt, isLoading } = usePrompt({
+    onSuccess: (response) => {
+      aiResponseCallback(response);
+    },
+    onError: (error) => {
+      aiResponseCallback(`Error: ${error}`);
+    }
+  });
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (ref.current && !ref.current.contains(event.target as Node)) {
@@ -130,9 +139,8 @@ export default function AIDropDown({
     setOpen(false);
     
     try {
-      // Call the API with tone and style options
-      const response = await getPromptResponse(text, option.prompt, option.tone, option.style);
-      aiResponseCallback(response.result || 'No response received');
+      // Use the hook instead of direct API call
+      await generatePrompt(text, option.prompt, option.tone, option.style);
     } catch (error) {
       console.error('Error getting AI response:', error);
       aiResponseCallback('Error: Unable to get AI response');
@@ -154,8 +162,20 @@ export default function AIDropDown({
           ...buttonStyle,
         }}
         onClick={() => setOpen((o) => !o)}
+        disabled={isLoading}
       >
-        {renderIcon?.()}
+        {isLoading ? (
+          <div style={{ 
+            width: '16px', 
+            height: '16px', 
+            border: '2px solid #e3e2e0', 
+            borderTop: '2px solid #37352f', 
+            borderRadius: '50%', 
+            animation: 'spin 1s linear infinite' 
+          }} />
+        ) : (
+          renderIcon?.()
+        )}
       </button>
     );
   };
