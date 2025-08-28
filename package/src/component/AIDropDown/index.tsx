@@ -16,7 +16,8 @@ interface AIDropDownProps {
   optionStyle?: React.CSSProperties;
   optionHoverStyle?: React.CSSProperties;
   buttonStyle?: React.CSSProperties;
-  size?: '48px' | '52px';
+  size?: string;
+  iconColor?: string;
   promptOptions: PromptOption[]
 }
 
@@ -61,8 +62,8 @@ const defaultOptions:PromptOption[] = [
 
 const defaultDropdownStyle: React.CSSProperties = {
   position: 'absolute',
-  top: '2.5rem',
-  left: 0,
+  top: '2.6rem',
+  left: '-65px',
   background: '#fff',
   borderRadius: '8px',
   boxShadow: '0 4px 16px rgba(15,15,15,0.12)',
@@ -104,6 +105,7 @@ export default function AIDropDown({
   optionHoverStyle,
   buttonStyle,
   size = '48px',
+  iconColor = '#000',
   promptOptions = []
 }: AIDropDownProps) {
   const [open, setOpen] = useState(false);
@@ -154,7 +156,7 @@ export default function AIDropDown({
         }}
         onClick={() => setOpen((o) => !o)}
       >
-        <AIWand />
+        <AIWand color={iconColor} />
       </button>
     );
   };

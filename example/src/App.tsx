@@ -47,7 +47,7 @@ function App() {
           }}
         />
         <div style={{ position: 'absolute', top: '50%', right: 6, transform: 'translateY(-49%)' }}>
-          <AIDropDown text={input} aiResponseCallback={handleAIResponse} size='38px' />
+          <AIDropDown iconColor='#000' text={input} aiResponseCallback={handleAIResponse} size='38px' />
         </div>
       </div>
     </div>
