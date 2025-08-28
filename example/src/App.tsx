@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import {AIDropDown} from 'prompt-my-client-react'
+import AIWand from './assets/wand';
 // import MyApp from 'prompt-my-client-react/src/App'
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
           }}
         />
         <div style={{ position: 'absolute', top: '50%', right: 6, transform: 'translateY(-49%)' }}>
-          <AIDropDown iconColor='#000' text={input} aiResponseCallback={handleAIResponse} size='38px' />
+          <AIDropDown renderIcon={() => <AIWand color='#000' />} iconColor='#000' text={input} aiResponseCallback={handleAIResponse} size='38px' />
         </div>
       </div>
     </div>

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import AIWand from '../../icons/wand';
 import '../../css/AIDropDown.css';
 import { getPromptResponse } from '../../api/prompt';
 
@@ -17,7 +16,7 @@ interface AIDropDownProps {
   optionHoverStyle?: React.CSSProperties;
   buttonStyle?: React.CSSProperties;
   size?: string;
-  iconColor?: string;
+  renderIcon?: () => React.ReactNode;
   promptOptions: PromptOption[]
 }
 
@@ -105,7 +104,7 @@ export default function AIDropDown({
   optionHoverStyle,
   buttonStyle,
   size = '48px',
-  iconColor = '#000',
+  renderIcon,
   promptOptions = []
 }: AIDropDownProps) {
   const [open, setOpen] = useState(false);
@@ -156,7 +155,7 @@ export default function AIDropDown({
         }}
         onClick={() => setOpen((o) => !o)}
       >
-        <AIWand color={iconColor} />
+        {renderIcon?.()}
       </button>
     );
   };
