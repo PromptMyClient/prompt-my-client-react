@@ -2,8 +2,6 @@
 
 A React component library that provides an AI-powered dropdown interface for text enhancement and transformation. Perfect for applications that need AI assistance with text content.
 
-**Keywords:** AI text enhancement, language translation, grammar correction, text transformation, content optimization, writing assistant, AI-powered editing, text improvement, language processing, content enhancement, writing tools, AI writing helper, text refinement, language correction, content editing, AI text tools, writing enhancement, text optimization, language improvement, content transformation, AI content assistant
-
 ## Features
 
 - 🤖 **AI-Powered Text Enhancement** - Transform text with various tones and styles
@@ -12,6 +10,7 @@ A React component library that provides an AI-powered dropdown interface for tex
 - ⚡ **Easy Integration** - Simple drop-in component for React applications
 - 🎯 **Pre-built Prompts** - Comes with common text transformation options
 - 🔧 **Extensible** - Add your own custom prompt options
+- 🪝 **Custom Hook** - Use `usePrompt` hook for custom implementations
 
 ## Installation
 
@@ -26,6 +25,52 @@ yarn add prompt-my-client-react
 ```
 
 ## Quick Start
+
+### Example 1: Using the usePrompt Hook
+
+```tsx
+import { usePrompt } from 'prompt-my-client-react';
+
+function App() {
+  const [input, setInput] = useState('');
+  
+  const { generatePrompt, isLoading, error, result } = usePrompt({
+    onSuccess: (response) => {
+      setInput(response);
+      console.log('AI Response:', response);
+    },
+    onError: (error) => {
+      console.error('Error:', error);
+    }
+  });
+
+  const handleGenerate = async () => {
+    await generatePrompt(
+      input,
+      "Make this text more professional and concise",
+      "professional",
+      "concise"
+    );
+  };
+
+  return (
+    <div>
+      <textarea 
+        value={input} 
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Type your text here..." 
+      />
+      <button onClick={handleGenerate} disabled={isLoading}>
+        {isLoading ? 'Processing...' : 'Make Professional'}
+      </button>
+      {error && <p>Error: {error}</p>}
+      {result && <p>Result: {result}</p>}
+    </div>
+  );
+}
+```
+
+### Example 2: Using the AIDropDown Component
 
 ```tsx
 import { AIDropDown } from 'prompt-my-client-react';
@@ -124,12 +169,57 @@ function App() {
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `size` | `'48px' \| '52px'` | `'48px'` | Size of the AI button |
+| `size` | `string` | `'48px'` | Size of the AI button |
+| `renderIcon` | `() => React.ReactNode` | `undefined` | Custom icon renderer function |
 | `promptOptions` | `PromptOption[]` | Built-in options | Custom prompt options |
 | `dropdownStyle` | `React.CSSProperties` | Default styles | Custom dropdown styling |
 | `optionStyle` | `React.CSSProperties` | Default styles | Custom option styling |
 | `optionHoverStyle` | `React.CSSProperties` | Default styles | Custom hover styling |
 | `buttonStyle` | `React.CSSProperties` | Default styles | Custom button styling |
+
+## usePrompt Hook
+
+The `usePrompt` hook provides a flexible way to integrate AI text enhancement into your custom components.
+
+### Hook Return Values
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `generatePrompt` | `(text: string, prompt: string, tone?: string, style?: string) => Promise<void>` | Function to generate AI response |
+| `isLoading` | `boolean` | Loading state indicator |
+| `error` | `string \| null` | Error message if any |
+| `result` | `string \| null` | AI response result |
+| `reset` | `() => void` | Function to reset all states |
+
+### Hook Options
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `onSuccess` | `(response: string) => void` | Callback when AI response succeeds |
+| `onError` | `(error: string) => void` | Callback when an error occurs |
+
+### Hook Usage Example
+
+```tsx
+const { generatePrompt, isLoading, error, result } = usePrompt({
+  onSuccess: (response) => {
+    // Handle successful response
+    setText(response);
+  },
+  onError: (error) => {
+    // Handle error
+    showNotification(error);
+  }
+});
+
+// Generate AI response
+await generatePrompt(
+  "Hello world",           // text
+  "Make it formal",        // prompt
+  "professional",          // tone
+  "concise"               // style
+);
+```
 
 ## Default Prompt Options
 
@@ -229,3 +319,6 @@ This project is licensed under the MIT License.
 ## Support
 
 If you encounter any issues or have questions, please open an issue on the GitHub repository.
+
+
+**Keywords:** AI text enhancement, language translation, grammar correction, text transformation, content optimization, writing assistant, AI-powered editing, text improvement, language processing, content enhancement, writing tools, AI writing helper, text refinement, language correction, content editing, AI text tools, writing enhancement, text optimization, language improvement, content transformation, AI content assistant
