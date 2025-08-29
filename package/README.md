@@ -2,10 +2,13 @@
 
 A React component library that provides an AI-powered dropdown interface for text enhancement and transformation. Perfect for applications that need AI assistance with text content.
 
-## Features
+📘 Full documentation with live demos:  
+👉 [https://promptmyclient.vercel.app](https://promptmyclient.vercel.app)
 
+## Features
 - 🤖 **AI-Powered Text Enhancement** - Transform text with various tones and styles
 - 🎨 **Customizable UI** - Fully customizable dropdown and button styles
+- 🎨 **Language converter** - Convert bw any 2 languages
 - 📱 **Responsive Design** - Works seamlessly across different screen sizes
 - ⚡ **Easy Integration** - Simple drop-in component for React applications
 - 🎯 **Pre-built Prompts** - Comes with common text transformation options
