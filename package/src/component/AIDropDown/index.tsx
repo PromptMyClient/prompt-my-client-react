@@ -1,13 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../../css/AIDropDown.css';
 import { usePrompt } from '../../hooks/usePrompt';
+import { DEFAULT_PROMPT_OPTIONS } from '../../constants/prompts';
+import type { PromptOption } from '../../constants/prompts';
 
-type PromptOption = {
-  prompt: string, 
-  label: string, 
-  tone?: string, 
-  style?: string
-}
 interface AIDropDownProps {
   text: string;
   aiResponseCallback: (response: string) => void;
@@ -19,45 +14,6 @@ interface AIDropDownProps {
   renderIcon?: () => React.ReactNode;
   promptOptions: PromptOption[]
 }
-
-const defaultOptions:PromptOption[] = [
-  {
-    prompt: 'Fix grammer in the text',
-    label: 'Fix Grammar',
-    tone: 'professional',
-    style: 'concise'
-  },{
-    prompt: 'I need Professional tone',
-    label: 'Professional tone',
-    tone: 'professional',
-    style: 'formal'
-  },{
-    prompt: 'Make it short',
-    label: 'Make it short',
-    tone: 'friendly',
-    style: 'concise'
-  },{
-    prompt: 'Make it more detailed',
-    label: 'Make it detailed',
-    tone: 'professional',
-    style: 'detailed'
-  },{
-    prompt: 'Make it conversational',
-    label: 'Conversational',
-    tone: 'friendly',
-    style: 'conversational'
-  },{
-    prompt: 'Make it creative',
-    label: 'Creative',
-    tone: 'enthusiastic',
-    style: 'creative'
-  },{
-    prompt: 'Make it persuasive',
-    label: 'Persuasive',
-    tone: 'confident',
-    style: 'persuasive'
-  }
-];
 
 const defaultDropdownStyle: React.CSSProperties = {
   position: 'absolute',
@@ -180,7 +136,7 @@ export default function AIDropDown({
     );
   };
 
-  const OPTIONS = (promptOptions ?? []).length > 0 ? promptOptions : defaultOptions
+  const OPTIONS = (promptOptions ?? []).length > 0 ? promptOptions : DEFAULT_PROMPT_OPTIONS
 
   return (
     <div style={{ position: 'relative', display: 'inline-block' }} ref={ref}>

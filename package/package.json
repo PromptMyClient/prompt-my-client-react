@@ -1,17 +1,22 @@
 {
   "name": "prompt-my-client-react",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "files": ["dist"],
+  "sideEffects": false,
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./styles": "./dist/index.css"
   },
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
+    "analyze": "node analyze-bundle.js",
     "addGit": "eval \"$(ssh-agent -s)\" &&  ssh-add ~/.ssh/rajanlagah"
   },
   "peerDependencies": {
