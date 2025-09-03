@@ -321,7 +321,11 @@ This project is licensed under the MIT License.
 
 ## Support
 
-If you encounter any issues or have questions, please open an issue on the GitHub repository.
+If you encounter any issues or have questions, please open an issue on the [GitHub repository](https://github.com/PromptMyClient/prompt-my-client-react/issues).
+
+## Repository
+
+📁 **GitHub Repository:** [https://github.com/PromptMyClient/prompt-my-client-react](https://github.com/PromptMyClient/prompt-my-client-react)
 
 
 **Keywords:** AI text enhancement, language translation, grammar correction, text transformation, content optimization, writing assistant, AI-powered editing, text improvement, language processing, content enhancement, writing tools, AI writing helper, text refinement, language correction, content editing, AI text tools, writing enhancement, text optimization, language improvement, content transformation, AI content assistant
